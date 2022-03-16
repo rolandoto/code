@@ -54,7 +54,7 @@ const createRegister =async(req,res=response) =>{
     try {
     
     const Email = await usuario.findOne({email})
- 
+    
     if(Email ){
        return res.status(401).json({
             ok:false,
@@ -180,6 +180,7 @@ const ValidTokenUser =async(req,res=response) =>{
                 msg:"el numero no esta registrado con este usuario"
             })
         }       
+    var val = Math.floor(1000 + Math.random() * 9000);
 
     const user = "APIColombiared"
     const password ="Colombiared100%"
@@ -191,21 +192,24 @@ const ValidTokenUser =async(req,res=response) =>{
                 headers: {'Content-Type': 'application/json',
                 "Authorization":`Basic ${total}`
                 },
-                body: JSON.stringify({ to:`57${numbers}`,
-                text: `tu codigo  315455 `, 
-                from: `57${numbers}`})
+                body: JSON.stringify({ to:`573202720874`,
+                text: `tu codigo  ${val} `, 
+                from: `573202720874`})
         };
     
-    await fetch(url, options)
-    .then(res => res.json())
-    .then(json => console.log(json))
-    .catch(err => console.error('error:' + err));
+        await fetch(url, options)
+        .then(res => res.json())
+        .then(json => console.log(json))
+        .catch(err => console.error('error:' + err));
 
         const token = await GeneratJTW(isLogin.id,isLogin.email)
 
+       
+
         res.status(201).json({
             ok:true,
-            token:token
+            token:token,
+            code:val
         })
     } catch (error) {
         res.status(401).json({

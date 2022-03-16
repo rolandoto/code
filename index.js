@@ -5,10 +5,8 @@ const { dbConnection } = require('./database/database')
 require('dotenv').config()
 const path = require("path")
 const app =express()
-const btoa = require('btoa')
+
 const fetch = require("node-fetch")
-
-
 
 let port = process.env.PORT || 8080;
 app.use('/public',express.static(`${__dirname}/Storage/Imgs`))
