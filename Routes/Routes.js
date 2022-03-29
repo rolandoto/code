@@ -37,7 +37,13 @@ router.post("/validpassword", [
     ValidTokenUser
 )
 
-router.post("/updatepassword",UpdatePassword
+router.post("/updatepassword", 
+     [
+        check('passwordone','el passwordone es obligatorio').isLength({min:6}),
+        check('passwordtwo','el passwordtwo es obligatorio').isLength({min:6}),
+        ValidarCampos
+     ],
+      UpdatePassword
 )
 
 //+19107824959

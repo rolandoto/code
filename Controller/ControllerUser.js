@@ -41,7 +41,6 @@ const LoginUsuario =async(req,res=response) =>{
             ok:false
         })
     }
-
 }
 
 const createRegister =async(req,res=response) =>{
@@ -55,7 +54,7 @@ const createRegister =async(req,res=response) =>{
     
     const Email = await usuario.findOne({email})
     
-    if(Email ){
+    if(Email){
        return res.status(401).json({
             ok:false,
             msg:"elija otro correo este ya esta disponible"
@@ -124,17 +123,26 @@ const createRegister =async(req,res=response) =>{
 
 const uploadImage = async(req,res=response) =>{
     
-    const {email} = req.body
-    
+    const {email,name} = req.body
+
     try {
 
-        let product = new usuario({email})
+        let product = new usuario({name})
+
+        const findName  = await usuario.findOne({name})
+
+        if(findName){
+            return res.status(401).json({
+                ok:false,
+                msg:"elija otros nombre por favor"
+            })
+        }
 
         //rolando
         const {filename} = req.file
-        console.log(filename)
-            product.setImgUrl(filename)
-       
+        
+        product.setImgUrl(filename)
+
         //usuario.setImgUrl(filename)
         
         const to = await  product.save()
@@ -148,7 +156,6 @@ const uploadImage = async(req,res=response) =>{
             ok:false
         })
     }
-
 }
 
 const GetProduct = async(req,res=response) =>{
@@ -204,8 +211,6 @@ const ValidTokenUser =async(req,res=response) =>{
 
         const token = await GeneratJTW(isLogin.id,isLogin.email)
 
-       
-
         res.status(201).json({
             ok:true,
             token:token,
@@ -221,10 +226,10 @@ const ValidTokenUser =async(req,res=response) =>{
 const UpdatePassword  =async(req,res=response) =>{
 
     const {numbers,passwordone,passwordtwo} = req.body
-
+    
     try {
         
-        const IsLogin = await usuario.findOne({numbers})
+        const IsLogin = await usuario.findOne({passwordone})
 
         if(!IsLogin){
             return res.status(201).json({
@@ -239,7 +244,6 @@ const UpdatePassword  =async(req,res=response) =>{
                 msg:"no coinciden las password"
             })
         }
-    
     
     const {id} = IsLogin
     
@@ -270,9 +274,6 @@ const UpdatePassword  =async(req,res=response) =>{
         res.status(401).json({
             ok:false,
         })
-
     }
-    
-
 }
 module.exports ={LoginUsuario,createRegister,uploadImage,GetProduct,ValidTokenUser,UpdatePassword}

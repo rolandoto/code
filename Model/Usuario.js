@@ -13,6 +13,9 @@ const UsusuariSchema = Schema({
     passwordtwo:{
           type:String,
          },
+     name:{
+          type:String,
+         },
      imgUrl:String
 })
 
