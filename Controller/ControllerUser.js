@@ -129,14 +129,7 @@ const uploadImage = async(req,res=response) =>{
 
         let product = new usuario({name})
 
-        const findName  = await usuario.findOne({name})
-
-        if(findName){
-            return res.status(401).json({
-                ok:false,
-                msg:"elija otros nombre por favor"
-            })
-        }
+       
 
         //rolando
         const {filename} = req.file
