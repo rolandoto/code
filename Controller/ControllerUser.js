@@ -121,14 +121,15 @@ const createRegister =async(req,res=response) =>{
 }
 
 
-const uploadImage = async(req,res=response) =>{
+const uploadImage = async(req, res, next) =>{
+
     
     const {email,name} = req.body
 
     try {
 
         let product = new usuario({name})
-
+    
         const findName  = await usuario.findOne({name})
 
         if(findName){
@@ -137,6 +138,7 @@ const uploadImage = async(req,res=response) =>{
                 msg:"elija otros nombre por favor"
             })
         }
+       
 
         //rolando
         const {filename} = req.file
@@ -203,7 +205,7 @@ const ValidTokenUser =async(req,res=response) =>{
                 text: `tu codigo  ${val} `, 
                 from: `573202720874`})
         };
-    
+        
         await fetch(url, options)
         .then(res => res.json())
         .then(json => console.log(json))

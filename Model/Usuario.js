@@ -10,13 +10,13 @@ const UsusuariSchema = Schema({
      passwordone:{
           type:String,
          },
-    passwordtwo:{
+     passwordtwo:{
           type:String,
          },
-     name:{
+     username:{
           type:String,
          },
-     imgUrl:String
+     imgUrl:String,
 })
 
 UsusuariSchema.methods.setImgUrl= function setImgUrl (filename){
@@ -26,5 +26,4 @@ UsusuariSchema.methods.setImgUrl= function setImgUrl (filename){
 }
 
 module.exports= model('Usuario',UsusuariSchema)
-
 
