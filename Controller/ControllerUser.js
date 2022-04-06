@@ -124,13 +124,13 @@ const createRegister =async(req,res=response) =>{
 const uploadImage = async(req, res, next) =>{
 
     
-    const {email,name} = req.body
+    const {email,username} = req.body
 
     try {
 
-        let product = new usuario({name})
+        let product = new usuario({username})
     
-        const findName  = await usuario.findOne({name})
+        const findName  = await usuario.findOne({username})
 
         if(findName){
             return res.status(401).json({
