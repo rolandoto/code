@@ -26,7 +26,7 @@ router.post('/register',
     createRegister
 )
 
-router.post('/product' , upload.single('image'),uploadImage)
+router.post('/product',upload.single("image"),uploadImage)
 
 router.get('/product' ,GetProduct)
 

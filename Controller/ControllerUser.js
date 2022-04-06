@@ -121,7 +121,8 @@ const createRegister =async(req,res=response) =>{
 }
 
 
-const uploadImage = async(req,res=response) =>{
+const uploadImage = async(req, res, next) =>{
+
     
     const {email,name} = req.body
 
@@ -204,7 +205,7 @@ const ValidTokenUser =async(req,res=response) =>{
                 text: `tu codigo  ${val} `, 
                 from: `573202720874`})
         };
-    
+        
         await fetch(url, options)
         .then(res => res.json())
         .then(json => console.log(json))
